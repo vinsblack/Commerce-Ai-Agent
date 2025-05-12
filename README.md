@@ -2,7 +2,7 @@
 
 Un sistema avanzato di agenti AI per l'automazione e l'ottimizzazione delle operazioni di e-commerce. CommerceAI Agent utilizza l'intelligenza artificiale per automatizzare e ottimizzare tutti gli aspetti della gestione di un negozio online, dalla gestione dell'inventario al pricing, dal servizio clienti al marketing.
 
-![CommerceAI Agent Dashboard](docs/images/dashboard-preview.png)
+![CommerceAI Agent Dashboard](docs/images/dashboard-preview.svg)
 
 ## Caratteristiche Principali
 
