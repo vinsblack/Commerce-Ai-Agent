@@ -76,8 +76,6 @@ Accedi al nostro marketplace di automazioni e template pre-costruiti:
 - Strategie di pricing pre-configurate
 - Regole di gestione inventario ottimizzate
 
-Visita la [pagina dei prezzi](https://commerceai.example.com/pricing) per maggiori dettagli e per confrontare i piani.
-
 ## Installazione e Configurazione
 
 ### Prerequisiti
