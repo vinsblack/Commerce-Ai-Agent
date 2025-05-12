@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CommerceAI Agent - Automazione intelligente per il tuo e-commerce</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #4361ee;
+      --secondary-color: #3f37c9;
+      --accent-color: #4cc9f0;
+      --text-color: #333;
+      --light-bg: #f8f9fa;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+    
+    .hero {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      padding: 100px 0;
+      text-align: center;
+    }
+    
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+    
+    .hero p {
+      font-size: 1.25rem;
+      max-width: 800px;
+      margin: 0 auto 2rem;
+    }
+    
+    .feature-card {
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+      height: 100%;
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .feature-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: var(--primary-color);
+    }
+    
+    .pricing-card {
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+      height: 100%;
+    }
+    
+    .pricing-card.highlighted {
+      border: 2px solid var(--primary-color);
+      transform: scale(1.05);
+    }
+    
+    .pricing-card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .pricing-card.highlighted:hover {
+      transform: scale(1.05) translateY(-5px);
+    }
+    
+    .pricing-header {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    
+    .pricing-features {
+      padding: 20px;
+    }
+    
+    .pricing-price {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin: 1rem 0;
+    }
+    
+    .section {
+      padding: 80px 0;
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    
+    .section-title h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+    
+    .btn-primary {
+      background-color: var(--primary-color);
+      border-color: var(--primary-color);
+    }
+    
+    .btn-primary:hover {
+      background-color: var(--secondary-color);
+      border-color: var(--secondary-color);
+    }
+    
+    .footer {
+      background-color: var(--light-bg);
+      padding: 50px 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: var(--primary-color);">
+    <div class="container">
+      <a class="navbar-brand" href="#">CommerceAI Agent</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#features">Funzionalità</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#pricing">Prezzi</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#demo">Demo</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/yourusername/commerce-ai-agent">GitHub</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link btn btn-light text-primary ms-2" href="#contact">Contattaci</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <h1>Automazione intelligente per il tuo e-commerce</h1>
+      <p>CommerceAI Agent utilizza l'intelligenza artificiale per automatizzare e ottimizzare tutti gli aspetti della gestione di un negozio online, dalla gestione dell'inventario al pricing, dal servizio clienti al marketing.</p>
+      <div class="d-flex justify-content-center gap-3">
+        <a href="#pricing" class="btn btn-light btn-lg">Scopri i piani</a>
+        <a href="#demo" class="btn btn-outline-light btn-lg">Prova la demo</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="section" id="features">
+    <div class="container">
+      <div class="section-title">
+        <h2>Funzionalità principali</h2>
+        <p>Scopri come CommerceAI Agent può trasformare il tuo business</p>
+      </div>
+      
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-3">
+          <div class="feature-card p-4">
+            <div class="feature-icon">
+              <i class="bi bi-box-seam"></i>
+            </div>
+            <h3>Gestione Inventario</h3>
+            <p>Ottimizza i livelli di stock, prevedi la domanda e automatizza i riordini con l'intelligenza artificiale.</p>
+          </div>
+        </div>
+        
+        <div class="col-md-6 col-lg-3">
+          <div class="feature-card p-4">
+            <div class="feature-icon">
+              <i class="bi bi-graph-up"></i>
+            </div>
+            <h3>Pricing Dinamico</h3>
+            <p>Analizza il mercato e la concorrenza per ottimizzare i prezzi e massimizzare i profitti.</p>
+          </div>
+        </div>
+        
+        <div class="col-md-6 col-lg-3">
+          <div class="feature-card p-4">
+            <div class="feature-icon">
+              <i class="bi bi-chat-dots"></i>
+            </div>
+            <h3>Servizio Clienti</h3>
+            <p>Rispondi automaticamente alle domande frequenti e gestisci i problemi comuni con l'agente AI.</p>
+          </div>
+        </div>
+        
+        <div class="col-md-6 col-lg-3">
+          <div class="feature-card p-4">
+            <div class="feature-icon">
+              <i class="bi bi-megaphone"></i>
+            </div>
+            <h3>Marketing Automatizzato</h3>
+            <p>Genera contenuti, ottimizza le campagne e segmenta i clienti per aumentare le conversioni.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="row g-4 mt-4">
+        <div class="col-md-6 col-lg-3">
+          <div class="feature-card p-4">
+            <div class="feature-icon">
+              <i class="bi bi-shop"></i>
+            </div>
+            <h3>Multi-Marketplace</h3>
+            <p>Integrazione con Shopify, WooCommerce, Amazon, eBay e altri marketplace popolari.</p>
+          </div>
+        </div>
+        
+        <div class="col-md-6 col-lg-3">
+          <div class="feature-card p-4">
+            <div class="feature-icon">
+              <i class="bi bi-credit-card"></i>
+            </div>
+            <h3>Pagamenti</h3>
+            <p>Integrazione con Stripe, PayPal e altri gateway di pagamento popolari.</p>
+          </div>
+        </div>
+        
+        <div class="col-md-6 col-lg-3">
+          <div class="feature-card p-4">
+            <div class="feature-icon">
+              <i class="bi bi-truck"></i>
+            </div>
+            <h3>Spedizioni</h3>
+            <p>Integrazione con DHL, UPS, FedEx e altri servizi di spedizione.</p>
+          </div>
+        </div>
+        
+        <div class="col-md-6 col-lg-3">
+          <div class="feature-card p-4">
+            <div class="feature-icon">
+              <i class="bi bi-gear"></i>
+            </div>
+            <h3>Personalizzabile</h3>
+            <p>Adatta CommerceAI Agent alle tue esigenze specifiche con opzioni di configurazione avanzate.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Demo Section -->
+  <section class="section bg-light" id="demo">
+    <div class="container">
+      <div class="section-title">
+        <h2>Vedi CommerceAI Agent in azione</h2>
+        <p>Scopri come CommerceAI Agent può trasformare il tuo business</p>
+      </div>
+      
+      <div class="row align-items-center">
+        <div class="col-lg-6">
+          <h3>Dashboard intuitiva</h3>
+          <p>La dashboard di CommerceAI Agent fornisce una panoramica completa del tuo business, con metriche chiave, grafici e suggerimenti degli agenti AI.</p>
+          <ul class="list-group mb-4">
+            <li class="list-group-item">Visualizza vendite giornaliere, settimanali e mensili</li>
+            <li class="list-group-item">Monitora i prodotti più venduti</li>
+            <li class="list-group-item">Ricevi suggerimenti dagli agenti AI</li>
+            <li class="list-group-item">Analizza le tendenze dei clienti</li>
+          </ul>
+          <a href="#contact" class="btn btn-primary">Richiedi una demo personalizzata</a>
+        </div>
+        <div class="col-lg-6">
+          <img src="images/dashboard-preview.png" alt="CommerceAI Agent Dashboard" class="img-fluid rounded shadow">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section class="section" id="pricing">
+    <div class="container">
+      <div class="section-title">
+        <h2>Piani e prezzi</h2>
+        <p>Scegli il piano più adatto alle tue esigenze</p>
+      </div>
+      
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="pricing-card">
+            <div class="pricing-header">
+              <h3>Free</h3>
+            </div>
+            <div class="pricing-features text-center">
+              <div class="pricing-price">€0</div>
+              <p>per mese</p>
+              <ul class="list-unstyled">
+                <li>1 negozio</li>
+                <li>Fino a 100 prodotti</li>
+                <li>Fino a 100 ordini/mese</li>
+                <li>Agenti AI base (esecuzione manuale)</li>
+                <li>Dashboard e reportistica base</li>
+                <li>Supporto email</li>
+              </ul>
+              <a href="#contact" class="btn btn-outline-primary mt-3">Inizia gratis</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-4">
+          <div class="pricing-card highlighted">
+            <div class="pricing-header">
+              <h3>Pro</h3>
+            </div>
+            <div class="pricing-features text-center">
+              <div class="pricing-price">€49</div>
+              <p>per mese</p>
+              <ul class="list-unstyled">
+                <li>3 negozi</li>
+                <li>Fino a 1.000 prodotti</li>
+                <li>Fino a 1.000 ordini/mese</li>
+                <li>Agenti AI avanzati con esecuzione automatica</li>
+                <li>Dashboard e reportistica avanzata</li>
+                <li>Integrazioni con marketplace principali</li>
+                <li>Supporto prioritario</li>
+                <li>API access</li>
+              </ul>
+              <a href="#contact" class="btn btn-primary mt-3">Scegli Pro</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-4">
+          <div class="pricing-card">
+            <div class="pricing-header">
+              <h3>Enterprise</h3>
+            </div>
+            <div class="pricing-features text-center">
+              <div class="pricing-price">€199</div>
+              <p>per mese</p>
+              <ul class="list-unstyled">
+                <li>Negozi illimitati</li>
+                <li>Prodotti illimitati</li>
+                <li>Ordini illimitati</li>
+                <li>Agenti AI personalizzati</li>
+                <li>Dashboard e reportistica personalizzata</li>
+                <li>Integrazioni con tutti i marketplace</li>
+                <li>Supporto dedicato 24/7</li>
+                <li>API access completo</li>
+                <li>White-labeling</li>
+              </ul>
+              <a href="#contact" class="btn btn-outline-primary mt-3">Contattaci</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="section bg-light" id="contact">
+    <div class="container">
+      <div class="section-title">
+        <h2>Contattaci</h2>
+        <p>Hai domande? Siamo qui per aiutarti</p>
+      </div>
+      
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="card shadow">
+            <div class="card-body p-4">
+              <form>
+                <div class="mb-3">
+                  <label for="name" class="form-label">Nome</label>
+                  <input type="text" class="form-control" id="name" required>
+                </div>
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="email" required>
+                </div>
+                <div class="mb-3">
+                  <label for="subject" class="form-label">Oggetto</label>
+                  <input type="text" class="form-control" id="subject">
+                </div>
+                <div class="mb-3">
+                  <label for="message" class="form-label">Messaggio</label>
+                  <textarea class="form-control" id="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Invia messaggio</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4">
+          <h4>CommerceAI Agent</h4>
+          <p>Automazione intelligente per il tuo e-commerce</p>
+        </div>
+        <div class="col-lg-2">
+          <h5>Prodotto</h5>
+          <ul class="list-unstyled">
+            <li><a href="#features">Funzionalità</a></li>
+            <li><a href="#pricing">Prezzi</a></li>
+            <li><a href="#demo">Demo</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2">
+          <h5>Risorse</h5>
+          <ul class="list-unstyled">
+            <li><a href="#">Documentazione</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2">
+          <h5>Azienda</h5>
+          <ul class="list-unstyled">
+            <li><a href="#">Chi siamo</a></li>
+            <li><a href="#">Contatti</a></li>
+            <li><a href="#">Privacy</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2">
+          <h5>Social</h5>
+          <ul class="list-unstyled">
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">LinkedIn</a></li>
+            <li><a href="#">GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+      <hr>
+      <div class="text-center">
+        <p>&copy; 2025 CommerceAI Agent. Tutti i diritti riservati.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"></script>
+</body>
+</html>

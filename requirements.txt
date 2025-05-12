@@ -1,0 +1,57 @@
+# API e Web
+fastapi==0.103.1
+uvicorn==0.23.2
+websockets==11.0.3
+starlette==0.27.0
+pydantic==2.4.2
+
+# Database
+sqlalchemy==2.0.21
+alembic==1.12.0
+psycopg2-binary==2.9.7
+redis==5.0.1
+
+# Task Queue
+celery==5.3.4
+flower==2.0.1
+kombu==5.3.2
+rabbitmq-admin==0.2
+
+# AI e ML
+langchain==0.0.312
+openai==1.1.1
+huggingface-hub==0.17.3
+sentence-transformers==2.2.2
+scikit-learn==1.3.1
+numpy==1.26.0
+pandas==2.1.1
+
+# Email
+email-validator==2.0.0
+jinja2==3.1.2
+aiosmtplib==2.0.2
+
+# Integrazioni
+requests==2.31.0
+httpx==0.25.0
+stripe==6.7.0
+paypalrestsdk==1.13.1
+shopify==12.2.0
+boto3==1.28.53
+
+# Sicurezza
+python-jose==3.3.0
+passlib==1.7.4
+bcrypt==4.0.1
+python-multipart==0.0.6
+
+# Utilità
+python-dotenv==1.0.0
+pyyaml==6.0.1
+tenacity==8.2.3
+loguru==0.7.2
+
+# Testing
+pytest==7.4.2
+pytest-asyncio==0.21.1
+httpx==0.25.0

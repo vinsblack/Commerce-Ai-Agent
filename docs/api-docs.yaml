@@ -1,0 +1,1067 @@
+openapi: 3.0.3
+info:
+  title: CommerceAI Agent API
+  description: |
+    API per l'automazione e l'ottimizzazione delle operazioni di e-commerce con agenti AI.
+    
+    Questa API permette di gestire prodotti, ordini, clienti, negozi, integrazioni e agenti AI.
+  version: 1.0.0
+  contact:
+    email: info@commerceai.example.com
+  license:
+    name: Dual License (MIT/Commercial)
+    url: https://github.com/yourusername/commerce-ai-agent/blob/main/LICENSE
+
+servers:
+  - url: http://localhost:8000/api/v1
+    description: Server di sviluppo locale
+  - url: https://api.commerceai.example.com/api/v1
+    description: Server di produzione
+
+tags:
+  - name: auth
+    description: Autenticazione e gestione utenti
+  - name: products
+    description: Gestione prodotti
+  - name: orders
+    description: Gestione ordini
+  - name: customers
+    description: Gestione clienti
+  - name: stores
+    description: Gestione negozi
+  - name: integrations
+    description: Gestione integrazioni con marketplace e servizi esterni
+  - name: agents
+    description: Gestione agenti AI
+
+paths:
+  /auth/register:
+    post:
+      tags:
+        - auth
+      summary: Registrazione nuovo utente
+      description: Crea un nuovo account utente
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCreate'
+      responses:
+        '201':
+          description: Utente creato con successo
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Dati di registrazione non validi
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /auth/login:
+    post:
+      tags:
+        - auth
+      summary: Login utente
+      description: Autentica un utente e restituisce un token JWT
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserLogin'
+      responses:
+        '200':
+          description: Login effettuato con successo
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+        '401':
+          description: Credenziali non valide
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /auth/me:
+    get:
+      tags:
+        - auth
+      summary: Profilo utente
+      description: Restituisce i dati dell'utente autenticato
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Dati utente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          description: Non autenticato
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /products:
+    get:
+      tags:
+        - products
+      summary: Lista prodotti
+      description: Restituisce la lista dei prodotti con filtri opzionali
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: query
+          name: store_id
+          schema:
+            type: string
+          description: Filtra per negozio
+        - in: query
+          name: category
+          schema:
+            type: string
+          description: Filtra per categoria
+        - in: query
+          name: search
+          schema:
+            type: string
+          description: Ricerca per nome o SKU
+        - in: query
+          name: page
+          schema:
+            type: integer
+            default: 1
+          description: Numero di pagina
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 20
+          description: Elementi per pagina
+      responses:
+        '200':
+          description: Lista prodotti
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+        '401':
+          description: Non autenticato
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+        - products
+      summary: Crea prodotto
+      description: Crea un nuovo prodotto
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductCreate'
+      responses:
+        '201':
+          description: Prodotto creato con successo
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '400':
+          description: Dati prodotto non validi
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Non autenticato
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /products/{product_id}:
+    get:
+      tags:
+        - products
+      summary: Dettaglio prodotto
+      description: Restituisce i dettagli di un prodotto specifico
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: product_id
+          required: true
+          schema:
+            type: string
+          description: ID del prodotto
+      responses:
+        '200':
+          description: Dettagli prodotto
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '404':
+          description: Prodotto non trovato
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Non autenticato
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      tags:
+        - products
+      summary: Aggiorna prodotto
+      description: Aggiorna un prodotto esistente
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: product_id
+          required: true
+          schema:
+            type: string
+          description: ID del prodotto
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductUpdate'
+      responses:
+        '200':
+          description: Prodotto aggiornato con successo
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '400':
+          description: Dati prodotto non validi
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Prodotto non trovato
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Non autenticato
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      tags:
+        - products
+      summary: Elimina prodotto
+      description: Elimina un prodotto esistente
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: product_id
+          required: true
+          schema:
+            type: string
+          description: ID del prodotto
+      responses:
+        '204':
+          description: Prodotto eliminato con successo
+        '404':
+          description: Prodotto non trovato
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Non autenticato
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /orders:
+    get:
+      tags:
+        - orders
+      summary: Lista ordini
+      description: Restituisce la lista degli ordini con filtri opzionali
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: query
+          name: store_id
+          schema:
+            type: string
+          description: Filtra per negozio
+        - in: query
+          name: status
+          schema:
+            type: string
+            enum: [pending, processing, shipped, delivered, cancelled, refunded]
+          description: Filtra per stato
+        - in: query
+          name: customer_id
+          schema:
+            type: string
+          description: Filtra per cliente
+        - in: query
+          name: page
+          schema:
+            type: integer
+            default: 1
+          description: Numero di pagina
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 20
+          description: Elementi per pagina
+      responses:
+        '200':
+          description: Lista ordini
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+        '401':
+          description: Non autenticato
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /customers:
+    get:
+      tags:
+        - customers
+      summary: Lista clienti
+      description: Restituisce la lista dei clienti con filtri opzionali
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: query
+          name: search
+          schema:
+            type: string
+          description: Ricerca per nome, email o telefono
+        - in: query
+          name: page
+          schema:
+            type: integer
+            default: 1
+          description: Numero di pagina
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 20
+          description: Elementi per pagina
+      responses:
+        '200':
+          description: Lista clienti
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Customer'
+        '401':
+          description: Non autenticato
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /stores:
+    get:
+      tags:
+        - stores
+      summary: Lista negozi
+      description: Restituisce la lista dei negozi
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Lista negozi
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Store'
+        '401':
+          description: Non autenticato
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+        - stores
+      summary: Crea negozio
+      description: Crea un nuovo negozio
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StoreCreate'
+      responses:
+        '201':
+          description: Negozio creato con successo
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Store'
+        '400':
+          description: Dati negozio non validi
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Non autenticato
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /integrations:
+    get:
+      tags:
+        - integrations
+      summary: Lista integrazioni
+      description: Restituisce la lista delle integrazioni
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Lista integrazioni
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Integration'
+        '401':
+          description: Non autenticato
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /agents:
+    get:
+      tags:
+        - agents
+      summary: Lista agenti
+      description: Restituisce la lista degli agenti AI
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Lista agenti
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Agent'
+        '401':
+          description: Non autenticato
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+        - agents
+      summary: Crea agente
+      description: Crea un nuovo agente AI
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentCreate'
+      responses:
+        '201':
+          description: Agente creato con successo
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agent'
+        '400':
+          description: Dati agente non validi
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Non autenticato
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /agents/{agent_id}/start:
+    post:
+      tags:
+        - agents
+      summary: Avvia agente
+      description: Avvia l'esecuzione di un agente AI
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: agent_id
+          required: true
+          schema:
+            type: string
+          description: ID dell'agente
+      responses:
+        '200':
+          description: Agente avviato con successo
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentRun'
+        '404':
+          description: Agente non trovato
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Non autenticato
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    UserCreate:
+      type: object
+      required:
+        - email
+        - password
+        - first_name
+        - last_name
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password
+        first_name:
+          type: string
+        last_name:
+          type: string
+        company_name:
+          type: string
+        phone:
+          type: string
+
+    UserLogin:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password
+
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        email:
+          type: string
+          format: email
+        first_name:
+          type: string
+        last_name:
+          type: string
+        company_name:
+          type: string
+        phone:
+          type: string
+        is_active:
+          type: boolean
+        subscription_plan:
+          type: string
+          enum: [free, pro, enterprise]
+        created_at:
+          type: string
+          format: date-time
+        preferences:
+          type: object
+          properties:
+            email_notifications:
+              type: boolean
+            sms_notifications:
+              type: boolean
+            language:
+              type: string
+            currency:
+              type: string
+
+    Token:
+      type: object
+      properties:
+        access_token:
+          type: string
+        token_type:
+          type: string
+          enum: [bearer]
+        expires_in:
+          type: integer
+          description: Scadenza token in secondi
+
+    ProductCreate:
+      type: object
+      required:
+        - name
+        - sku
+        - price
+        - quantity
+        - store_id
+      properties:
+        name:
+          type: string
+        sku:
+          type: string
+        price:
+          type: number
+          format: float
+        compare_at_price:
+          type: number
+          format: float
+        quantity:
+          type: integer
+        is_active:
+          type: boolean
+          default: true
+        categories:
+          type: array
+          items:
+            type: string
+        store_id:
+          type: string
+          format: uuid
+        description:
+          type: string
+
+    ProductUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        sku:
+          type: string
+        price:
+          type: number
+          format: float
+        compare_at_price:
+          type: number
+          format: float
+        quantity:
+          type: integer
+        is_active:
+          type: boolean
+        categories:
+          type: array
+          items:
+            type: string
+        description:
+          type: string
+
+    Product:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        sku:
+          type: string
+        price:
+          type: number
+          format: float
+        compare_at_price:
+          type: number
+          format: float
+        quantity:
+          type: integer
+        is_active:
+          type: boolean
+        categories:
+          type: array
+          items:
+            type: string
+        store_id:
+          type: string
+          format: uuid
+        description:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    Order:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        order_number:
+          type: string
+        status:
+          type: string
+          enum: [pending, processing, shipped, delivered, cancelled, refunded]
+        total_price:
+          type: number
+          format: float
+        subtotal:
+          type: number
+          format: float
+        shipping_price:
+          type: number
+          format: float
+        tax_price:
+          type: number
+          format: float
+        discount_price:
+          type: number
+          format: float
+        currency:
+          type: string
+        customer_id:
+          type: string
+          format: uuid
+        customer_name:
+          type: string
+        customer_email:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              product_id:
+                type: string
+                format: uuid
+              product_name:
+                type: string
+              quantity:
+                type: integer
+              price:
+                type: number
+                format: float
+              total:
+                type: number
+                format: float
+        shipping_address:
+          type: object
+          properties:
+            address1:
+              type: string
+            address2:
+              type: string
+            city:
+              type: string
+            province:
+              type: string
+            postal_code:
+              type: string
+            country:
+              type: string
+
+    Customer:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        email:
+          type: string
+          format: email
+        first_name:
+          type: string
+        last_name:
+          type: string
+        phone:
+          type: string
+        is_active:
+          type: boolean
+        accepts_marketing:
+          type: boolean
+        default_address:
+          type: object
+          properties:
+            address1:
+              type: string
+            address2:
+              type: string
+            city:
+              type: string
+            province:
+              type: string
+            postal_code:
+              type: string
+            country:
+              type: string
+        birthdate:
+          type: string
+          format: date
+        created_at:
+          type: string
+          format: date-time
+        orders_count:
+          type: integer
+        total_spent:
+          type: number
+          format: float
+
+    StoreCreate:
+      type: object
+      required:
+        - name
+        - type
+        - url
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+          enum: [shopify, woocommerce, magento, prestashop, custom]
+        url:
+          type: string
+        settings:
+          type: object
+          properties:
+            auto_sync:
+              type: boolean
+              default: true
+            sync_interval:
+              type: integer
+              default: 60
+            currency:
+              type: string
+              default: EUR
+
+    Store:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        type:
+          type: string
+          enum: [shopify, woocommerce, magento, prestashop, custom]
+        url:
+          type: string
+        status:
+          type: string
+          enum: [active, inactive, error]
+        products_count:
+          type: integer
+        orders_count:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+        last_sync:
+          type: string
+          format: date-time
+        settings:
+          type: object
+          properties:
+            auto_sync:
+              type: boolean
+            sync_interval:
+              type: integer
+            currency:
+              type: string
+
+    Integration:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        type:
+          type: string
+          enum: [marketplace, payment, shipping, other]
+        provider:
+          type: string
+        status:
+          type: string
+          enum: [active, inactive, error]
+        store_url:
+          type: string
+        last_sync:
+          type: string
+          format: date-time
+        created_at:
+          type: string
+          format: date-time
+        settings:
+          type: object
+
+    AgentCreate:
+      type: object
+      required:
+        - name
+        - type
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+          enum: [inventory, pricing, customer_service, marketing]
+        description:
+          type: string
+        settings:
+          type: object
+          properties:
+            run_frequency:
+              type: integer
+              default: 24
+            auto_run:
+              type: boolean
+              default: true
+            confidence_threshold:
+              type: number
+              format: float
+              default: 0.7
+            max_actions_per_run:
+              type: integer
+              default: 50
+            notification_on_completion:
+              type: boolean
+              default: true
+
+    Agent:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        type:
+          type: string
+          enum: [inventory, pricing, customer_service, marketing]
+        status:
+          type: string
+          enum: [active, inactive, running, error]
+        description:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        last_run:
+          type: string
+          format: date-time
+        settings:
+          type: object
+          properties:
+            run_frequency:
+              type: integer
+            auto_run:
+              type: boolean
+            confidence_threshold:
+              type: number
+              format: float
+            max_actions_per_run:
+              type: integer
+            notification_on_completion:
+              type: boolean
+
+    AgentRun:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        agent_id:
+          type: string
+          format: uuid
+        status:
+          type: string
+          enum: [running, completed, failed]
+        started_at:
+          type: string
+          format: date-time
+        completed_at:
+          type: string
+          format: date-time
+        actions_taken:
+          type: integer
+        results:
+          type: string
+
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
+        status_code:
+          type: integer
+        type:
+          type: string

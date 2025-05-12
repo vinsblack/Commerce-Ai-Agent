@@ -1,0 +1,21 @@
+Descrizione dell'immagine dashboard-preview.png
+
+Questa immagine dovrebbe mostrare una schermata della dashboard di CommerceAI Agent con le seguenti caratteristiche:
+
+1. Layout moderno con sidebar a sinistra contenente il menu di navigazione
+2. Area principale che mostra:
+   - Grafici di vendite giornaliere/settimanali/mensili
+   - Widget con metriche chiave (totale vendite, ordini, clienti)
+   - Lista degli ordini recenti
+   - Prodotti più venduti
+   - Attività recenti degli agenti AI
+
+3. Palette di colori coerente con il tema dell'applicazione (blu primario #4361ee)
+
+Per ottenere un'immagine reale per questa anteprima:
+1. Puoi utilizzare uno strumento di design come Figma o Adobe XD
+2. Puoi utilizzare template di dashboard da siti come ThemeForest o Creative Market
+3. Puoi generare un'immagine utilizzando strumenti di AI come DALL-E o Midjourney
+4. Puoi fare uno screenshot dell'applicazione reale una volta implementata
+
+Nota: Assicurati che l'immagine sia in formato PNG con dimensioni adeguate (suggerite: 1200x800px) e che sia ottimizzata per il web.
