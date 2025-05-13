@@ -282,6 +282,9 @@ Questo progetto è distribuito con licenza dual:
 - Versione Community: MIT License
 - Versione Pro: Licenza Commerciale
 
+  [![Sponsor](https://img.shields.io/badge/Sponsor-vinsblack-blueviolet?logo=github)](https://github.com/sponsors/vinsblack)
+
+
 ## Contatti
 - **Email**: vincenzo.gallo77@hotmail.com
 
